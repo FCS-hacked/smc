@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 contract Signer {
@@ -11,6 +12,16 @@ contract Signer {
         signed_files[msg.sender].push(file);
         file_signers[file].push(msg.sender);
         emit Signed(msg.sender, file);
+    }
+
+    function check_signature(uint256 file, address signer) external view returns (bool result) {
+        uint256[] memory files = signed_files[signer];
+        for (uint256 i = 0; i < files.length; i++) {
+            if (files[i] == file) {
+                return true;
+            }
+        }
+        return false;   
     }
 
 }
