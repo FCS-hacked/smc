@@ -24,4 +24,11 @@ contract Signer {
         return false;   
     }
 
+    function get_file_signers(uint256 file) external view returns (address [] memory signers) {
+        return file_signers[file];
+    }
+
+    function get_signed_files(address ad) external view returns (uint256 [] memory files) {
+        return signed_files[ad];
+    }
 }
