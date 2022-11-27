@@ -8,6 +8,9 @@ contract Signer {
 
     mapping (uint256 => address[]) public file_signers;
 
+
+    mapping (uint256 => address) public directory;
+
     function sign(uint256 file) external {
         signed_files[msg.sender].push(file);
         file_signers[file].push(msg.sender);
@@ -30,5 +33,13 @@ contract Signer {
 
     function get_signed_files(address ad) external view returns (uint256 [] memory files) {
         return signed_files[ad];
+    }
+
+    function write_directory(uint256 hash) external {
+        directory[hash] = msg.sender;
+    }
+
+    function read_directory(uint256 hash) external view returns (address) {
+        return directory[hash];
     }
 }
