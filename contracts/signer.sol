@@ -36,6 +36,7 @@ contract Signer {
     }
 
     function write_directory(uint256 hash) external {
+        assert (directory[hash] == address(0));
         directory[hash] = msg.sender;
     }
 
